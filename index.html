@@ -169,10 +169,6 @@
                             <span>Subtotal:</span>
                             <span id="subtotal-price" class="font-bold text-slate-200">0.00 €</span>
                         </div>
-                        <div class="flex justify-between text-slate-400">
-                            <span>Gastos de envío:</span>
-                            <span id="delivery-price" class="font-bold text-slate-200">2.00 €</span>
-                        </div>
                         <div class="flex justify-between text-base font-black text-white pt-2 border-t border-slate-800">
                             <span>Total a pagar:</span>
                             <span id="total-price" class="text-amber-400 text-xl font-bold">2.00 €</span>
@@ -223,7 +219,7 @@
     <!-- Mobile Floating Cart Bar -->
     <div class="lg:hidden fixed bottom-0 left-0 right-0 bg-[#0D1322]/95 backdrop-blur-md border-t border-slate-800 p-3 z-50 flex items-center justify-between shadow-2xl">
         <div>
-            <span class="text-[10px] text-slate-400 block font-medium">Total (con envío):</span>
+            <span class="text-[10px] text-slate-400 block font-medium">Total a pagar:</span>
             <span id="mobile-total-price" class="text-base font-extrabold text-amber-400">2.00 €</span>
         </div>
         <button onclick="scrollToCart()" class="bg-gradient-to-r from-amber-500 to-red-600 text-white font-bold px-4 py-2.5 rounded-xl flex items-center gap-2 text-xs shadow-lg">
@@ -244,255 +240,48 @@
            RESTAURANT CONFIGURATION
            ========================================================================== */
         const WHATSAPP_NUMBER = "34674588713"; // Sustituye por el número de WhatsApp real del restaurante
-        const DELIVERY_FEE = 2.00;             // Gastos de envío en Euros
         const CURRENCY = "€";
 
         /* ==========================================================================
            FULL MENU DATA (Mapeado exactamente del Menú Real de LA TASCA)
            ========================================================================== */
         const menuItems = [
-            // --- NUESTRAS TAPAS ---
-            {
-                id: 1,
-                name: "Morros Fritos",
-                category: "tapas",
-                price: 5.90,
-                desc: "Crujientes y especiados con salsa alioli.",
-                image: "https://images.unsplash.com/photo-1541529086526-db283c563270?auto=format&fit=crop&w=600&q=80"
-            },
-            {
-                id: 2,
-                name: "Patatas Fritas LUX",
-                category: "tapas",
-                price: 6.00,
-                desc: "Patatas fritas LUX de corte rústico, gruesas, doradas y crujientes con sal marina y perejil.",
-                image: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=600&q=80"
-            },
-            {
-                id: 3,
-                name: "Croquetas de Jamón (5ud.)",
-                category: "tapas",
-                price: 6.50,
-                desc: "Cremosas y crujientes, con auténtico sabor a jamón ibérico.",
-                image: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=600&q=80"
-            },
-            {
-                id: 4,
-                name: "Croquetas de Bacalao (5ud.)",
-                category: "tapas",
-                price: 6.50,
-                desc: "Cremosas y crujientes con sabor tradicional de bacalao.",
-                image: "https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?auto=format&fit=crop&w=600&q=80"
-            },
-            {
-                id: 5,
-                name: "Croquetas de Cocido (5ud.)",
-                category: "tapas",
-                price: 6.50,
-                desc: "Cremosas y crujientes, rellenas de carne de cocido desmechada.",
-                image: "https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=600&q=80"
-            },
-            {
-                id: 6,
-                name: "Croquetas de Pollo (5ud.)",
-                category: "tapas",
-                price: 6.50,
-                desc: "Cremosas y crujientes rellenas de pollo jugoso desmechado.",
-                image: "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=600&q=80"
-            },
-            {
-                id: 7,
-                name: "Alitas de Pollo",
-                category: "tapas",
-                price: 6.90,
-                desc: "Jugosas alitas fritas bien doradas y crujientes.",
-                image: "https://images.unsplash.com/photo-1567620832903-9fc6debc209f?auto=format&fit=crop&w=600&q=80"
-            },
-            {
-                id: 8,
-                name: "Alitas Marinadas BBQ",
-                category: "tapas",
-                price: 7.00,
-                desc: "Alitas marinadas a la parrilla bañadas con salsa BBQ.",
-                image: "https://images.unsplash.com/photo-1527477396000-e27163b481c2?auto=format&fit=crop&w=600&q=80"
-            },
-            {
-                id: 9,
-                name: "Jamón Serrano con Pan y Tomate",
-                category: "tapas",
-                price: 7.00,
-                desc: "Jamón serrano de calidad servido con pan artesano con tomate fresco.",
-                image: "https://images.unsplash.com/photo-1509722747041-616f39b57569?auto=format&fit=crop&w=600&q=80"
-            },
-            {
-                id: 10,
-                name: "Nuggets de Pollo",
-                category: "tapas",
-                price: 7.50,
-                desc: "Crujientes nuggets de pollo ideales para compartir.",
-                image: "https://images.unsplash.com/photo-1562967916-eb82221dfb92?auto=format&fit=crop&w=600&q=80"
-            },
-            {
-                id: 11,
-                name: "Pollo Crujiente Casero",
-                category: "tapas",
-                price: 7.50,
-                desc: "Tiras de pollo crujiente casero acompañado de nuestra salsa especial.",
-                image: "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=600&q=80"
-            },
-            {
-                id: 12,
-                name: "Calamares a la Andaluza",
-                category: "tapas",
-                price: 7.50,
-                desc: "Calamares enharinados y fritos al estilo andaluz, servidos con limón y sal.",
-                image: "https://images.unsplash.com/photo-1604909052743-94e838986d24?auto=format&fit=crop&w=600&q=80"
-            },
-            {
-                id: 13,
-                name: "Gambas a la Plancha",
-                category: "tapas",
-                price: 7.80,
-                desc: "Gambas sabrosas preparadas a la plancha con ajo y perejil fresco.",
-                image: "https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?auto=format&fit=crop&w=600&q=80"
-            },
-            {
-                id: 14,
-                name: "Chocos Fritos",
-                category: "tapas",
-                price: 7.90,
-                desc: "Calamares / chocos fritos y crujientes, acompañados con limón y sal.",
-                image: "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=600&q=80"
-            },
-
-            // --- HAMBURGUESAS GOURMET (Todas incluyen patatas fritas) ---
-            {
-                id: 15,
-                name: "1. Hamburguesa Tres Rosas",
-                category: "burgers",
-                price: 10.00,
-                desc: "Hamburguesa de ternera, cebolla caramelizada y queso de cabra. (Incluye patatas fritas)",
-                image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80"
-            },
-            {
-                id: 16,
-                name: "2. Hamburguesa Completa",
-                category: "burgers",
-                price: 10.00,
-                desc: "Hamburguesa de ternera, lechuga, tomate, huevo, queso y mahonesa. (Incluye patatas fritas)",
-                image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=600&q=80"
-            },
-            {
-                id: 17,
-                name: "3. Hamburguesa BBQ",
-                category: "burgers",
-                price: 10.00,
-                desc: "Hamburguesa de ternera, bacon crujiente, queso y salsa BBQ. (Incluye patatas fritas)",
-                image: "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=600&q=80"
-            },
-            {
-                id: 18,
-                name: "4. Hamburguesa Tex-Mex",
-                category: "burgers",
-                price: 10.00,
-                desc: "Hamburguesa de ternera, tomate, queso, guacamole y salsa Tex-Mex. (Incluye patatas fritas)",
-                image: "https://images.unsplash.com/photo-1607013251379-e6eecfffe234?auto=format&fit=crop&w=600&q=80"
-            },
-            {
-                id: 19,
-                name: "5. Hamburguesa de Pollo Rebozado",
-                category: "burgers",
-                price: 10.00,
-                desc: "Pollo rebozado, huevo, bacon, lechuga y tomate. (Incluye patatas fritas)",
-                image: "https://images.unsplash.com/photo-1625813506062-0aeb1d7a094b?auto=format&fit=crop&w=600&q=80"
-            },
-
-            // --- PLATOS COMBINADOS (Incluyen pan, patatas LUX, ensalada y 3 salsas) ---
-            {
-                id: 20,
-                name: "1. Plato Pollo",
-                category: "platos",
-                price: 12.00,
-                desc: "Brocheta de pollo marinado a la parrilla, patatas fritas LUX, ensalada, pan y 3 salsas (Alioli, Ketchup, Chermoula verde).",
-                image: "https://images.unsplash.com/photo-1532550907401-a500c9a57435?auto=format&fit=crop&w=600&q=80"
-            },
-            {
-                id: 21,
-                name: "2. Plato Kefta",
-                category: "platos",
-                price: 12.00,
-                desc: "Kefta a la parrilla con especias, patatas fritas LUX, ensalada, pan y 3 salsas (Alioli, Ketchup, Chermoula verde).",
-                image: "https://images.unsplash.com/photo-1529042410759-befb1204b468?auto=format&fit=crop&w=600&q=80"
-            },
-            {
-                id: 22,
-                name: "3. Plato Mixto",
-                category: "platos",
-                price: 12.00,
-                desc: "Kefta, brocheta de pollo, salchichas, patatas fritas LUX, ensalada, pan y 3 salsas (Alioli, Ketchup, Chermoula verde).",
-                image: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80"
-            },
-            {
-                id: 23,
-                name: "4. Plato Salchichas",
-                category: "platos",
-                price: 12.00,
-                desc: "Salchichas a la parrilla, patatas fritas LUX, ensalada, pan y 3 salsas (Alioli, Ketchup, Chermoula verde).",
-                image: "https://images.unsplash.com/photo-1597393397811-c88f1708170c?auto=format&fit=crop&w=600&q=80"
-            },
-            {
-                id: 24,
-                name: "5. Plato Frankfurt",
-                category: "platos",
-                price: 12.00,
-                desc: "Frankfurt a la parrilla, patatas fritas LUX, ensalada, pan y 3 salsas (Alioli, Ketchup, Chermoula verde).",
-                image: "https://images.unsplash.com/photo-1619740455993-9e612b1af08a?auto=format&fit=crop&w=600&q=80"
-            },
-
-            // --- TACOS & STREET FOOD ---
-            {
-                id: 25,
-                name: "Tacos Mixtos (Pollo y Ternera)",
-                category: "street",
-                price: 7.00,
-                desc: "Tacos rellenos de pollo marinado y ternera, queso fundido, patatas y salsa de la casa.",
-                image: "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=600&q=80"
-            },
-            {
-                id: 26,
-                name: "Bocadillo Tacos / Rollo Street Food",
-                category: "street",
-                price: 6.50,
-                desc: "Rollo relleno estilo street food con patatas fritas, queso y salsas caseras.",
-                image: "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&fit=crop&w=600&q=80"
-            },
-
-            // --- BEBIDAS ---
-            {
-                id: 27,
-                name: "Refresco 33cl",
-                category: "drinks",
-                price: 1.80,
-                desc: "Coca-Cola, Fanta Naranja, Fanta Limón, Aquarius o Sprite (bien fría).",
-                image: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=600&q=80"
-            },
-            {
-                id: 28,
-                name: "Agua Mineral 50cl",
-                category: "drinks",
-                price: 1.50,
-                desc: "Agua mineral embotellada refrescante.",
-                image: "https://images.unsplash.com/photo-1560023907-5f339617ea30?auto=format&fit=crop&w=600&q=80"
-            },
-            {
-                id: 29,
-                name: "Cerveza 33cl",
-                category: "drinks",
-                price: 2.00,
-                desc: "Cerveza bien fría ideal para acompañar tus tapas y platos.",
-                image: "https://images.unsplash.com/photo-1608270586620-248524c67de9?auto=format&fit=crop&w=600&q=80"
-            }
-        ];
+            { id: 1, name: "Morros Fritos", category: "tapas", price: 5.90, desc: "Morros fritos.", image: "https://images.unsplash.com/photo-1541529086526-db283c563270?auto=format&fit=crop&w=600&q=80" },
+            { id: 2, name: "Patatas Fritas LUX", category: "tapas", price: 6.00, desc: "Patatas fritas LUX.", image: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=600&q=80" },
+            { id: 3, name: "Croquetas de Jamón", category: "tapas", price: 6.50, desc: "Croquetas de jamón.", image: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=600&q=80" },
+            { id: 4, name: "Croquetas de Bacalao", category: "tapas", price: 6.50, desc: "Croquetas de bacalao.", image: "https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?auto=format&fit=crop&w=600&q=80" },
+            { id: 5, name: "Croquetas de Cocido", category: "tapas", price: 6.50, desc: "Croquetas de cocido.", image: "https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=600&q=80" },
+            { id: 6, name: "Croquetas de Pollo", category: "tapas", price: 6.50, desc: "Croquetas de pollo.", image: "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=600&q=80" },
+            { id: 7, name: "Alitas de Pollo", category: "tapas", price: 6.90, desc: "Alitas de pollo.", image: "https://images.unsplash.com/photo-1567620832903-9fc6debc209f?auto=format&fit=crop&w=600&q=80" },
+            { id: 9, name: "Jamón con Pan con Tomate", category: "tapas", price: 7.00, desc: "Jamón con pan con tomate.", image: "https://images.unsplash.com/photo-1509722747041-616f39b57569?auto=format&fit=crop&w=600&q=80" },
+            { id: 10, name: "Nuggets", category: "tapas", price: 7.50, desc: "Nuggets.", image: "https://images.unsplash.com/photo-1562967916-eb82221dfb92?auto=format&fit=crop&w=600&q=80" },
+            { id: 12, name: "Calamares a la Andaluza", category: "tapas", price: 7.50, desc: "Calamares a la andaluza.", image: "https://images.unsplash.com/photo-1604909052743-94e838986d24?auto=format&fit=crop&w=600&q=80" },
+            { id: 13, name: "Gambas", category: "tapas", price: 7.80, desc: "Gambas.", image: "https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?auto=format&fit=crop&w=600&q=80" },
+            { id: 14, name: "Chocos Fritos", category: "tapas", price: 7.90, desc: "Chocos fritos.", image: "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=600&q=80" },
+            { id: 15, name: "Hamburguesa Tres Rosas", category: "burgers", price: 10.00, desc: "Hamburguesa de ternera, cebolla caramelizada y queso de cabra. Incluye patatas fritas.", image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80" },
+            { id: 16, name: "Hamburguesa Completa", category: "burgers", price: 10.00, desc: "Hamburguesa de ternera, lechuga, tomate, huevo, queso y mahonesa. Incluye patatas fritas.", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=600&q=80" },
+            { id: 17, name: "Hamburguesa BBQ", category: "burgers", price: 10.00, desc: "Hamburguesa de ternera, bacon, queso y salsa BBQ. Incluye patatas fritas.", image: "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=600&q=80" },
+            { id: 18, name: "Hamburguesa Tex-Mex", category: "burgers", price: 10.00, desc: "Hamburguesa de ternera, tomate, queso, guacamole y salsa Tex-Mex. Incluye patatas fritas.", image: "https://images.unsplash.com/photo-1607013251379-e6eecfffe234?auto=format&fit=crop&w=600&q=80" },
+            { id: 19, name: "Hamburguesa de Pollo Rebozado", category: "burgers", price: 10.00, desc: "Pollo rebozado, huevo, bacon, lechuga y tomate. Incluye patatas fritas.", image: "https://images.unsplash.com/photo-1625813506062-0aeb1d7a094b?auto=format&fit=crop&w=600&q=80" },
+            { id: 20, name: "Plato Pollo", category: "platos", price: 12.00, desc: "Brocheta de pollo marinado a la parrilla, patatas LUX, ensalada, pan y 3 salsas.", image: "https://images.unsplash.com/photo-1532550907401-a500c9a57435?auto=format&fit=crop&w=600&q=80" },
+            { id: 21, name: "Plato Kefta", category: "platos", price: 12.00, desc: "Kefta a la parrilla con especias, patatas LUX, ensalada, pan y 3 salsas.", image: "https://images.unsplash.com/photo-1529042410759-befb1204b468?auto=format&fit=crop&w=600&q=80" },
+            { id: 22, name: "Plato Mixto", category: "platos", price: 12.00, desc: "Kefta, brocheta de pollo, salchichas, patatas LUX, ensalada, pan y 3 salsas.", image: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80" },
+            { id: 23, name: "Plato Salchichas", category: "platos", price: 12.00, desc: "Salchichas a la parrilla, patatas LUX, ensalada, pan y 3 salsas.", image: "https://images.unsplash.com/photo-1597393397811-c88f1708170c?auto=format&fit=crop&w=600&q=80" },
+            { id: 24, name: "Plato Frankfurt", category: "platos", price: 12.00, desc: "Frankfurt a la parrilla, patatas LUX, ensalada, pan y 3 salsas.", image: "https://images.unsplash.com/photo-1619740455993-9e612b1af08a?auto=format&fit=crop&w=600&q=80" },
+            { id: 30, name: "Taco Kefta", category: "street", price: 10.00, desc: "Taco francés: tortilla grande de harina doblada en forma rectangular, rellena de kefta, patatas fritas y salsa de queso, y tostada a la plancha.", image: "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&fit=crop&w=600&q=80" },
+            { id: 31, name: "Taco Pollo", category: "street", price: 10.00, desc: "Taco francés: tortilla grande de harina doblada en forma rectangular, rellena de pollo, patatas fritas y salsa de queso, y tostada a la plancha.", image: "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&fit=crop&w=600&q=80" },
+            { id: 32, name: "Taco Calamar", category: "street", price: 10.00, desc: "Taco francés: tortilla grande de harina doblada en forma rectangular, rellena de calamar, patatas fritas y salsa de queso, y tostada a la plancha.", image: "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&fit=crop&w=600&q=80" },
+            { id: 33, name: "Taco Frankfurt", category: "street", price: 8.00, desc: "Taco francés: tortilla grande de harina doblada en forma rectangular, rellena de Frankfurt, patatas fritas y salsa de queso, y tostada a la plancha.", image: "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&fit=crop&w=600&q=80" },
+            { id: 34, name: "Taco Cordon Bleu", category: "street", price: 10.00, desc: "Taco francés: tortilla grande de harina doblada en forma rectangular, rellena de cordon bleu, patatas fritas y salsa de queso, y tostada a la plancha.", image: "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&fit=crop&w=600&q=80" },
+            { id: 35, name: "Bocata Atún", category: "street", price: 8.00, desc: "Bocadillo de atún.", image: "https://images.unsplash.com/photo-1509722747041-616f39b57569?auto=format&fit=crop&w=600&q=80" },
+            { id: 36, name: "Bocata Cordon Bleu", category: "street", price: 10.00, desc: "Bocadillo de cordon bleu.", image: "https://images.unsplash.com/photo-1509722747041-616f39b57569?auto=format&fit=crop&w=600&q=80" },
+            { id: 37, name: "Bocata Frankfurt", category: "street", price: 8.00, desc: "Bocadillo de Frankfurt.", image: "https://images.unsplash.com/photo-1509722747041-616f39b57569?auto=format&fit=crop&w=600&q=80" },
+            { id: 38, name: "Bocata Calamar", category: "street", price: 10.00, desc: "Bocadillo de calamar.", image: "https://images.unsplash.com/photo-1509722747041-616f39b57569?auto=format&fit=crop&w=600&q=80" },
+            { id: 39, name: "Bocata Pollo", category: "street", price: 10.00, desc: "Bocadillo de pollo.", image: "https://images.unsplash.com/photo-1509722747041-616f39b57569?auto=format&fit=crop&w=600&q=80" },
+            { id: 40, name: "Bocata Kefta", category: "street", price: 10.00, desc: "Bocadillo de kefta.", image: "https://images.unsplash.com/photo-1509722747041-616f39b57569?auto=format&fit=crop&w=600&q=80" },
+            { id: 27, name: "Refresco 33cl", category: "drinks", price: 1.80, desc: "Coca-Cola, Fanta Naranja, Fanta Limón, Aquarius o Sprite.", image: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=600&q=80" },
+            { id: 28, name: "Agua Mineral 50cl", category: "drinks", price: 1.50, desc: "Agua mineral embotellada.", image: "https://images.unsplash.com/photo-1560023907-5f339617ea30?auto=format&fit=crop&w=600&q=80" },
+                    ];
 
         // App State
         let cart = [];
@@ -643,7 +432,7 @@
 
             // Calculations
             const subtotal = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
-            const total = subtotal > 0 ? (subtotal + DELIVERY_FEE) : 0;
+            const total = subtotal;
             const totalCount = cart.reduce((acc, item) => acc + item.qty, 0);
 
             // Update UI Labels
@@ -689,7 +478,7 @@
             }
 
             const subtotal = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
-            const total = subtotal + DELIVERY_FEE;
+            const total = subtotal;
 
             // Format WhatsApp Text Message
             let message = `🍽️ *NUEVO PEDIDO - LA TASCA* 🛵\n\n`;
@@ -709,7 +498,6 @@
 
             message += `\n-------------------------------\n`;
             message += `💵 *Subtotal:* ${subtotal.toFixed(2)} ${CURRENCY}\n`;
-            message += `🛵 *Envío a Domicilio:* ${DELIVERY_FEE.toFixed(2)} ${CURRENCY}\n`;
             message += `💰 *TOTAL A PAGAR:* *${total.toFixed(2)} ${CURRENCY}*\n`;
             message += `-------------------------------\n\n`;
             message += `¡Muchas gracias! Quedo a la espera de la confirmación del tiempo estimado de entrega.`;
