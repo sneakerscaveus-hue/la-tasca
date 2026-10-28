@@ -1,0 +1,10 @@
+media:
+  input: images
+  output: /images
+
+content:
+  - name: homepage
+    label: Page du site
+    type: file
+    path: index.html
+    format: raw
